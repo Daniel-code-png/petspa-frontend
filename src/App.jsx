@@ -7,6 +7,7 @@ import Register from './components/Auth/Register';
 import DashboardPage from './pages/DashboardPage';
 import MyAppointmentsPage from './pages/MyAppointmentsPage';
 import AdminPage from './pages/AdminPage';
+import MyCommentsPage from './pages/MyCommentsPage';
 
 function App() {
   return (
@@ -35,6 +36,16 @@ function App() {
                 <ProtectedRoute>
                   <Navbar />
                   <MyAppointmentsPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/my-comments"
+              element={
+                <ProtectedRoute>
+                  <Navbar />
+                  <MyCommentsPage />
                 </ProtectedRoute>
               }
             />
