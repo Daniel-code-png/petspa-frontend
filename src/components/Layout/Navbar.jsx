@@ -53,6 +53,13 @@ const Navbar = () => {
                   Mis Citas
                 </Link>
 
+                <Link
+                  to="/my-comments"
+                  className="text-gray-600 hover:text-gray-800 text-sm"
+                >
+                  Mis Comentarios
+                </Link>
+
                 <button
                   onClick={handleLogout}
                   className="btn-secondary text-sm"
@@ -110,6 +117,14 @@ const Navbar = () => {
                 className="text-gray-700 hover:bg-gray-50 px-2 py-2 rounded-lg text-sm"
               >
                 Mis Citas
+              </Link>
+
+              <Link
+                to="/my-comments"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:bg-gray-50 px-2 py-2 rounded-lg text-sm"
+              >
+                Mis Comentarios
               </Link>
 
               <button
