@@ -106,24 +106,24 @@ const AppointmentForm = ({ onSuccess }) => {
 
   return (
     <div className="card">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Agendar Nueva Cita</h2>
+      <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Agendar Nueva Cita</h2>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+        <div className="bg-red-50 border border-red-200 text-red-700 px-3 md:px-4 py-2 md:py-3 rounded-lg mb-4 text-sm">
           {error}
         </div>
       )}
 
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-4">
+        <div className="bg-green-50 border border-green-200 text-green-700 px-3 md:px-4 py-2 md:py-3 rounded-lg mb-4 text-sm">
           {success}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
         {/* Selección de Servicio */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-xs md:text-sm font-medium text-gray-700 mb-2">
             Servicio
           </label>
           <select
@@ -143,14 +143,14 @@ const AppointmentForm = ({ onSuccess }) => {
 
         {/* Mostrar detalles del servicio seleccionado */}
         {selectedService && (
-          <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
+          <div className="bg-primary-50 border border-primary-200 rounded-lg p-3 md:p-4">
             {services
               .filter((s) => s._id === selectedService)
               .map((service) => (
                 <div key={service._id}>
-                  <h3 className="font-semibold text-primary-800">{service.name}</h3>
-                  <p className="text-sm text-primary-700 mt-1">{service.description}</p>
-                  <div className="flex justify-between mt-2 text-sm text-primary-800">
+                  <h3 className="font-semibold text-primary-800 text-sm md:text-base">{service.name}</h3>
+                  <p className="text-xs md:text-sm text-primary-700 mt-1">{service.description}</p>
+                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0 mt-2 text-xs md:text-sm text-primary-800">
                     <span>Precio: ${service.price.toLocaleString()}</span>
                     <span>Duración: {service.duration} minutos</span>
                   </div>
@@ -161,7 +161,7 @@ const AppointmentForm = ({ onSuccess }) => {
 
         {/* Selección de Fecha */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-xs md:text-sm font-medium text-gray-700 mb-2">
             Fecha
           </label>
           <input
@@ -181,23 +181,23 @@ const AppointmentForm = ({ onSuccess }) => {
         {/* Selección de Hora */}
         {selectedDate && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-xs md:text-sm font-medium text-gray-700 mb-2">
               Horario
             </label>
             
             {availableSlots.length === 0 ? (
-              <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-3 rounded-lg">
+              <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 px-3 md:px-4 py-2 md:py-3 rounded-lg text-xs md:text-sm">
                 No hay horarios disponibles para esta fecha
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
                   {availableSlots.map((slot) => (
                     <button
                       key={slot}
                       type="button"
                       onClick={() => setSelectedTime(slot)}
-                      className={`px-4 py-2 rounded-lg border-2 transition-all ${
+                      className={`px-2 py-2 text-xs md:text-sm rounded-lg border-2 transition-all ${
                         selectedTime === slot
                           ? 'bg-primary-600 text-white border-primary-600'
                           : 'bg-white text-gray-700 border-gray-300 hover:border-primary-400'
@@ -210,14 +210,14 @@ const AppointmentForm = ({ onSuccess }) => {
 
                 {bookedSlots.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-sm font-medium text-gray-700 mb-2">
+                    <p className="text-xs md:text-sm font-medium text-gray-700 mb-2">
                       Horarios ocupados:
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {bookedSlots.map((slot) => (
                         <span
                           key={slot}
-                          className="px-3 py-1 bg-red-100 text-red-700 rounded-lg text-sm"
+                          className="px-2 md:px-3 py-1 bg-red-100 text-red-700 rounded-lg text-xs md:text-sm"
                         >
                           {slot}
                         </span>

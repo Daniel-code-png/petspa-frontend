@@ -25,3 +25,32 @@
     @apply bg-white rounded-xl shadow-lg p-6;
   }
 }
+@layer utilities {
+  .card {
+    @apply bg-white rounded-lg sm:rounded-xl shadow-md sm:shadow-lg p-4 sm:p-6;
+  }
+  
+  .input-field {
+    @apply w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200 font-medium text-sm sm:text-base;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 px-4 sm:px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors duration-200 font-medium text-sm sm:text-base;
+  }
+}
+
+/* Prevenir zoom en inputs en iOS */
+@supports (-webkit-touch-callout: none) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Scroll suave en móviles */
+* {
+  -webkit-overflow-scrolling: touch;
+}

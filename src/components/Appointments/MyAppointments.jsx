@@ -43,7 +43,6 @@ const MyAppointments = () => {
   const loadAvailableSlotsForEdit = async (date, currentTime) => {
     try {
       const { data } = await api.get(`/appointments/available/${date}`);
-      // Incluir el horario actual de la cita como disponible
       const slots = [...data.availableSlots, currentTime].sort();
       setAvailableSlots([...new Set(slots)]);
     } catch (error) {
@@ -127,37 +126,37 @@ const MyAppointments = () => {
 
   return (
     <div className="card">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Mis Citas</h2>
+      <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Mis Citas</h2>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">
           {error}
         </div>
       )}
 
       {appointments.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="text-6xl mb-4">📅</div>
-          <p className="text-gray-600">No tienes citas agendadas</p>
+        <div className="text-center py-8 md:py-12">
+          <div className="text-4xl md:text-6xl mb-4">📅</div>
+          <p className="text-gray-600 text-sm md:text-base">No tienes citas agendadas</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {appointments.map((appointment) => (
             <div
               key={appointment._id}
-              className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+              className="border border-gray-200 rounded-lg p-3 md:p-4 hover:shadow-md transition-shadow"
             >
               {editingId === appointment._id ? (
                 // Modo edición
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1">
                       Servicio
                     </label>
                     <select
                       value={editForm.service}
                       onChange={(e) => setEditForm(prev => ({ ...prev, service: e.target.value }))}
-                      className="input-field"
+                      className="input-field text-sm"
                     >
                       {services.map((service) => (
                         <option key={service._id} value={service._id}>
@@ -168,7 +167,7 @@ const MyAppointments = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1">
                       Fecha
                     </label>
                     <input
@@ -176,21 +175,21 @@ const MyAppointments = () => {
                       value={editForm.date}
                       onChange={(e) => handleEditDateChange(e.target.value)}
                       min={getMinDate()}
-                      className="input-field"
+                      className="input-field text-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1">
                       Horario
                     </label>
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
                       {availableSlots.map((slot) => (
                         <button
                           key={slot}
                           type="button"
                           onClick={() => setEditForm(prev => ({ ...prev, time: slot }))}
-                          className={`px-4 py-2 rounded-lg border-2 transition-all ${
+                          className={`px-2 py-2 text-xs md:text-sm rounded-lg border-2 transition-all ${
                             editForm.time === slot
                               ? 'bg-primary-600 text-white border-primary-600'
                               : 'bg-white text-gray-700 border-gray-300 hover:border-primary-400'
@@ -202,16 +201,16 @@ const MyAppointments = () => {
                     </div>
                   </div>
 
-                  <div className="flex space-x-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <button
                       onClick={() => handleUpdate(appointment._id)}
-                      className="btn-primary"
+                      className="btn-primary w-full sm:w-auto text-sm"
                     >
                       Guardar
                     </button>
                     <button
                       onClick={() => setEditingId(null)}
-                      className="btn-secondary"
+                      className="btn-secondary w-full sm:w-auto text-sm"
                     >
                       Cancelar
                     </button>
@@ -219,53 +218,59 @@ const MyAppointments = () => {
                 </div>
               ) : (
                 // Modo vista
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <h3 className="text-lg font-semibold text-gray-800">
-                        {appointment.service.name}
-                      </h3>
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(appointment.status)}`}>
-                        {appointment.status}
-                      </span>
+                <div>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-3">
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <h3 className="text-base md:text-lg font-semibold text-gray-800">
+                          {appointment.service.name}
+                        </h3>
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(appointment.status)}`}>
+                          {appointment.status}
+                        </span>
+                      </div>
+
+                      <p className="text-gray-600 text-xs md:text-sm mb-3">
+                        {appointment.service.description}
+                      </p>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs md:text-sm text-gray-600">
+                        <div className="flex items-center gap-1">
+                          <span>📅</span>
+                          <span className="capitalize truncate">{formatDate(appointment.date)}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span>🕐</span>
+                          <span>{appointment.time}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span>💰</span>
+                          <span>${appointment.service.price.toLocaleString()}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span>⏱️</span>
+                          <span>{appointment.service.duration} min</span>
+                        </div>
+                      </div>
                     </div>
 
-                    <p className="text-gray-600 text-sm mb-2">
-                      {appointment.service.description}
-                    </p>
-
-                    <div className="flex items-center space-x-4 text-sm text-gray-600">
-                      <div className="flex items-center space-x-1">
-                        <span>📅</span>
-                        <span className="capitalize">{formatDate(appointment.date)}</span>
+                    {appointment.status !== 'Cancelada' && appointment.status !== 'Completada' && (
+                      <div className="flex flex-row sm:flex-col gap-2">
+                        <button
+                          onClick={() => handleEdit(appointment)}
+                          className="flex-1 sm:flex-none px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-xs md:text-sm"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => handleCancel(appointment._id)}
+                          className="flex-1 sm:flex-none px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-xs md:text-sm"
+                        >
+                          Cancelar
+                        </button>
                       </div>
-                      <div className="flex items-center space-x-1">
-                        <span>🕐</span>
-                        <span>{appointment.time}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <span>💰</span>
-                        <span>${appointment.service.price.toLocaleString()}</span>
-                      </div>
-                    </div>
+                    )}
                   </div>
-
-                  {appointment.status !== 'Cancelada' && appointment.status !== 'Completada' && (
-                    <div className="flex space-x-2 ml-4">
-                      <button
-                        onClick={() => handleEdit(appointment)}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
-                      >
-                        Editar
-                      </button>
-                      <button
-                        onClick={() => handleCancel(appointment._id)}
-                        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
-                      >
-                        Cancelar
-                      </button>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
