@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../../utils/api';
+import { formatDateDisplay } from '../../utils/dateHelpers';
 
 const AppointmentManager = () => {
   const [appointments, setAppointments] = useState([]);
@@ -30,16 +31,6 @@ const AppointmentManager = () => {
     } catch (error) {
       alert('Error al actualizar el estado');
     }
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-CO', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
   };
 
   const getStatusColor = (status) => {
@@ -156,7 +147,7 @@ const AppointmentManager = () => {
                   <div className="flex items-center space-x-4 text-sm text-gray-600">
                     <div className="flex items-center space-x-1">
                       <span>📅</span>
-                      <span className="capitalize">{formatDate(appointment.date)}</span>
+                      <span className="capitalize">{formatDateDisplay(appointment.date)}</span>
                     </div>
                     <div className="flex items-center space-x-1">
                       <span>🕐</span>

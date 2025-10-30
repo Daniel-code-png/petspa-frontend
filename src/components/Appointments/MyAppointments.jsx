@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../../utils/api';
+import { formatDateDisplay, getLocalDateString } from '../../utils/dateHelpers';
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -51,7 +52,7 @@ const MyAppointments = () => {
   };
 
   const handleEdit = (appointment) => {
-    const appointmentDate = new Date(appointment.date).toISOString().split('T')[0];
+    const appointmentDate = getLocalDateString(appointment.date);
     setEditingId(appointment._id);
     setEditForm({
       date: appointmentDate,
@@ -99,16 +100,6 @@ const MyAppointments = () => {
       'Cancelada': 'bg-red-100 text-red-800'
     };
     return colors[status] || 'bg-gray-100 text-gray-800';
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-CO', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
   };
 
   const getMinDate = () => {
@@ -237,7 +228,7 @@ const MyAppointments = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs md:text-sm text-gray-600">
                         <div className="flex items-center gap-1">
                           <span>📅</span>
-                          <span className="capitalize truncate">{formatDate(appointment.date)}</span>
+                          <span className="capitalize">{formatDateDisplay(appointment.date)}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <span>🕐</span>
