@@ -6,11 +6,8 @@
   body {
     @apply bg-gradient-to-br from-amber-50 via-green-50 to-blue-50 min-h-screen font-['Bubblegum_Sans'];
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-['Bubblegum_Sans'] text-primary-600;
   }
-}
+
 
 @layer components {
   .btn-primary {
