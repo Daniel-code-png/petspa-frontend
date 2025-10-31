@@ -22,7 +22,7 @@ const TermsModal = ({ isOpen, onClose, onAccept }) => {
           <section>
             <h3 className="font-bold text-lg mb-2">1. Aceptación de Términos</h3>
             <p>
-              Al registrarse en Pet Spa, usted acepta los siguientes términos y condiciones,
+              Al registrarse en Mr Caninos Pets Care, usted acepta los siguientes términos y condiciones,
               así como las leyes aplicables en Colombia.
             </p>
           </section>
@@ -69,7 +69,7 @@ const TermsModal = ({ isOpen, onClose, onAccept }) => {
           <section>
             <h3 className="font-bold text-lg mb-2">5. Responsabilidades</h3>
             <p>
-              Pet Spa se compromete a brindar servicios de calidad con personal capacitado,
+              Mr Caninos Pets Care se compromete a brindar servicios de calidad con personal capacitado,
               siguiendo protocolos de higiene y seguridad para el bienestar de las mascotas.
             </p>
           </section>

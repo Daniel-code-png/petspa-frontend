@@ -19,7 +19,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <Link to="/dashboard" className="flex items-center space-x-2">
             <span className="text-2xl md:text-3xl">🐾</span>
-            <span className="text-lg md:text-xl font-bold text-primary-600">Pet Spa</span>
+            <span className="text-lg md:text-xl font-bold text-primary-600">Mr Caninos Pets Care</span>
           </Link>
 
           {/* Desktop Menu */}

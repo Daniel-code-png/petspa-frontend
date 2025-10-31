@@ -39,7 +39,7 @@ const Login = () => {
       <div className="card max-w-md w-full">
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">🐾</div>
-          <h1 className="text-3xl font-bold text-gray-800">Pet Spa</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Mr Caninos Pets Care</h1>
           <p className="text-gray-600 mt-2">Inicia sesión en tu cuenta</p>
         </div>
 
